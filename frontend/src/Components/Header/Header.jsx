@@ -1,5 +1,6 @@
 import "../../App.css"
 import "./Header.css"
+import { NavLink } from "react-router-dom"; 
 const Header = () => {
     return (
         <div className="header">
@@ -9,7 +10,9 @@ const Header = () => {
         </div>
         
         <div className="authentification">
+            <NavLink to="/login" >
             <button>Log in</button>
+            </NavLink>
             <button>Sign up</button>
         </div>
         </div>

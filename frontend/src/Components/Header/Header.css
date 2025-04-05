@@ -12,14 +12,16 @@
 .header .logo-title{
     position: absolute;    
     top: 0;
-    left: 0;
+    left: 10px;
     display: flex;
-    align-items: flex-start; 
-    gap: 8px;               
-    padding: 10px; 
-
+    
 }
 
 .header .logo{
     height: 120px;
+}
+
+.header .logo-title {
+  border-bottom: 1px solid #ffffff;
+
 }
