@@ -1,0 +1,25 @@
+.header .authentification{
+    position: absolute;    
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-start; 
+    gap: 8px;               
+    padding: 10px;
+
+}
+
+.header .logo-title{
+    position: absolute;    
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-start; 
+    gap: 8px;               
+    padding: 10px; 
+
+}
+
+.header .logo{
+    height: 120px;
+}
