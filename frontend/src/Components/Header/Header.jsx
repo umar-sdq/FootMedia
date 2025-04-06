@@ -1,19 +1,23 @@
 import "../../App.css"
 import "./Header.css"
 import { NavLink } from "react-router-dom"; 
+import logoFoot from "../../../public/FootMedia.png"
 const Header = () => {
     return (
         <div className="header">
-
+        <NavLink to="/" >
         <div className="logo-title">
-        <h2 className="title">FootMedia</h2>
+        <img className="logo" src={logoFoot} alt="" />
         </div>
+        </NavLink>
         
         <div className="authentification">
             <NavLink to="/login" >
-            <button>Log in</button>
+            <button>Log in</button> 
             </NavLink>
-            <button>Sign up</button>
+            <NavLink to="/signup" >
+            <button className="signup">Sign up</button>
+            </NavLink>
         </div>
         </div>
     )

@@ -21,7 +21,51 @@
     height: 120px;
 }
 
-.header .logo-title {
-  border-bottom: 1px solid #ffffff;
 
+.header .logo-title a {
+    text-decoration: none; 
+    color: inherit; 
 }
+
+.header{
+    border-bottom: 2px solid #ffffff;
+}
+button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1d1d1d;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: #ffffff;
+    border-radius: 30px;
+    margin-top: 45px;
+  }
+  
+  button:hover {
+    border-color: #7e78e9;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #0b0b0b;
+      background-color: #000000;
+    }
+    a:hover {
+      color: #151515;
+    }
+    button {
+      background-color: #000000;
+    }
+  }
+  .signup{
+    background-color: rgb(9, 24, 132);
+  }
+  .logo{
+    height: 40px;
+    width: 130px;
+  }
