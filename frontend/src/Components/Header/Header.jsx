@@ -10,7 +10,6 @@ const Header = () => {
         <img className="logo" src={logoFoot} alt="" />
         </div>
         </NavLink>
-        
         <div className="authentification">
             <NavLink to="/login" >
             <button>Log in</button> 

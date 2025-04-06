@@ -1,0 +1,17 @@
+
+
+.connexion {
+    border: 2px solid white;
+    display: flex;
+    gap: 20px; 
+}
+
+.user-pass {
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column; 
+}
+
+h1 {
+    margin: 0;
+}
