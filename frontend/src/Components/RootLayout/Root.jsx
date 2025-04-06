@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header/Header.jsx';
 import { Outlet } from 'react-router-dom';
 import './Root.css';
+import Navigation from '../Navigation/Navigation.jsx';
 const RootLayout = () => {
     return (
         <div>
@@ -10,6 +11,7 @@ const RootLayout = () => {
                 </header>
             <main>
                 <Outlet />
+                <Navigation/>
             </main>
             
         </div>

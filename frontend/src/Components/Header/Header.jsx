@@ -1,7 +1,7 @@
 import "../../App.css"
 import "./Header.css"
 import { NavLink } from "react-router-dom"; 
-import logoFoot from "../../../public/FootMedia.png"
+import logoFoot from "../../assets/FootMedia.png"
 const Header = () => {
     return (
         <div className="header">
