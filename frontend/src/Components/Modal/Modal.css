@@ -1,0 +1,60 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; 
+  }
+  
+  .pos-modal {
+    background: linear-gradient(to bottom, #000000, #000079);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  
+  .logo-equipe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .team-button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+  }
+  .team-button img {
+    width: 60px;
+    height: auto;
+  }
+  
+  .confirmer,
+  .annuler {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .confirmer:hover,
+  .annuler:hover {
+    background-color: #222;
+  }
+  

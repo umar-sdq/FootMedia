@@ -1,9 +1,15 @@
 import { useState } from "react";
 import "../SignUpForm/SignUpForm.css"
+import { NavLink } from "react-router-dom";
+import Modal from "../Modal/Modal.jsx";
 const SignUpForm = () => {
     
     const [passwordNotEqual, setPasswordNotEqual] = useState(false);
+    const [afficherModal, setAfficherModal] = useState(false);
 
+    const handleChooseClick = () => {
+      setAfficherModal(true);
+    };
     function handleSubmit(event) {
       event.preventDefault();
       const fd = new FormData(event.target);
@@ -21,17 +27,29 @@ const SignUpForm = () => {
     return (
       <>
         <div className="connexion">
-            <h1>asidslakd</h1>
+          <div className="info">
+          <h2>Restez connecté.</h2>
+          <h3>Rejoignez des milliers de fans passionnés  </h3>
+          <li>Partagez vos moments préférés</li>
+          <li>Commentez les matchs</li>
+          <li>découvrez les posts des supporters du monde entier</li>
+          <p>
+Votre équipe. <br />Votre mur. <br />Votre communauté.
+</p>
+          </div>
             <div className="user-pass">
           <h2>Création de compte</h2>
-          <h3>Choisissez votre equipe préférée</h3>
+          <button className="choisir" onClick={handleChooseClick}>Choisissez votre equipe préférée</button>
           <form onSubmit={handleSubmit}>
-            <h3>Nom d'utilisateur</h3>
-            <input name="utilisateur" type="text" placeholder="Entrez votre nom" required
+            <div>
+              <input name="utilisateur" type="text" placeholder="Nom d'utilisateur" required
             />
-            <h3>Mot de passe</h3>
-            <input name="password" type="password" placeholder="Entrez votre mot de passe" required
-            />
+            </div>
+            <div>
+              <input name="password" type="password" placeholder="Mot de passe" required
+
+            /></div>
+            
             <h3>Confirmation de mot de passe</h3>
             <input name="confirm-password"id="confirm-password" type="password" placeholder="Confirmez votre mot de passe"required
             />
@@ -41,11 +59,39 @@ const SignUpForm = () => {
                 <p>*Les mots de passe doivent être identiques</p>
               </div>
             )}
-            <button type="submit">Créer un compte</button>
-            
+            <div className="terms">
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                required
+              />
+              <p>
+              J'accepte les termes et conditions FootMedia
+              </p>
+            </div>
+            <button type="submit" className="creer">Créer un compte</button>
           </form>
+
+          <h4>Déja un compte?</h4>
+          <NavLink to="/login">
+          <button className="connexion">Connectez vous</button>
+          </NavLink>
+
           </div>
+          
         </div>
+        {afficherModal && (
+          <div className="modal-overlay">
+          <Modal
+          message="Choississez votre équipe préférée"
+          onConfirm={() => setAfficherModal(false)}
+          onCancel={() => setAfficherModal(false)}
+        />
+        </div>
+        
+
+      )}
       </>
     );
 }
