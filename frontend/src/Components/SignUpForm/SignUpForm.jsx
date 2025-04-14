@@ -5,6 +5,7 @@ import Modal from "../Modal/Modal.jsx";
 const SignUpForm = () => {
   const [passwordNotEqual, setPasswordNotEqual] = useState(false);
   const [afficherModal, setAfficherModal] = useState(false);
+  const [mdpLength, setMdpLength] = useState(false);
 
    const handleChooseClick = () => {
     setAfficherModal(true);
@@ -19,7 +20,7 @@ const SignUpForm = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:5000/api/users/register", {
+      const response = await fetch("http://localhost:5001/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +30,11 @@ const SignUpForm = () => {
     } catch (err) {
       console.error(err);
     }
+    if (data.password.length < 6) {
+      setMdpLength(true);
+      return;
+    }
+    setMdpLength(false);
     setPasswordNotEqual(false);
     console.log(data);
     event.target.reset();
@@ -57,7 +63,7 @@ const SignUpForm = () => {
           <form onSubmit={handleSubmit}>
             <div>
               <input
-                name="utilisateur"
+                name="username"
                 type="text"
                 placeholder="Nom d'utilisateur"
                 required
@@ -70,6 +76,11 @@ const SignUpForm = () => {
                 placeholder="Mot de passe"
                 required
               />
+              {mdpLength && (
+                <div>
+                  <p>*Le mot de passe doit contenir au moins 6 caractères</p>
+                </div>
+              )}
             </div>
 
             <h3>Confirmation de mot de passe</h3>
