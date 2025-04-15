@@ -25,7 +25,14 @@ import sevilla from '../../assets/UEFA/sevilla.svg';
 import shakhtar from '../../assets/UEFA/shakhtar-donetsk.svg';
 import sheriff from '../../assets/UEFA/sheriff-tiraspol.svg';
 import sporting from '../../assets/UEFA/sporting-cp.svg';
+import { useEffect } from 'react';
+import { useState } from 'react';
 function Modal({ message, onConfirm, onCancel }) {
+    const [loaded, setLoaded] = useState(false);
+    
+      useEffect(() => {
+        setLoaded(true);
+      }, []);
     const teams = [
         acMilan, ajax, atalanta, atleticoMadrid, barcelona, bayern,
         benfica, besiktas, clubBrugge, dynamoKiyv, fcPorto, interMilan,
@@ -34,7 +41,7 @@ function Modal({ message, onConfirm, onCancel }) {
       ];
       
   return (
-    <div className="pos-modal">
+    <div className={`pos-modal ${loaded ? "fade-in" : ""}`}>
         <h3>{message}</h3>
         
         <div className='logo-equipe'>

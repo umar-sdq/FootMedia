@@ -1,11 +1,21 @@
 import { useState } from "react";
 import "../SignUpForm/SignUpForm.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 import FootMedia from "../../assets/FMNoir.png";
-
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext/AuthContext";
+import { useEffect } from "react";
 const LoginForm = () => {
+  const [loaded, setLoaded] = useState(false);
+  
+    useEffect(() => {
+      setLoaded(true);
+    }, []);
+  const navigate = useNavigate();
+  const [validEntries, setvalidEntries] = useState(false);
   const [invalidEntries, setinvalidEntries] = useState(false);
+  const auth = useContext(AuthContext);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -26,19 +36,25 @@ const LoginForm = () => {
       if (!response.ok) {
         throw new Error(result.message || "Invalid login credentials");
       }
+
       console.log("Connecté !", result);
-      setinvalidEntries(false); // Réinitialise l'état si la connexion réussit
+      auth.login();
+      navigate("/");
+      setvalidEntries(true); 
+      setinvalidEntries(false);
     } catch (err) {
       console.error(err);
-      setinvalidEntries(true); // Définit l'état sur true si les entrées sont invalides
+      setinvalidEntries(true);
+      setvalidEntries(false); 
     }
+
     event.target.reset();
   }
 
   return (
     <>
-      <div className="connexion">
-        <div className="info">
+     <div className={`connexion ${loaded ? "fade-in" : ""}`}>
+      <div className="info">
           <h2>Restez connecté.</h2>
           <h3>Rejoignez des milliers de fans passionnés</h3>
           <li>Partagez vos moments préférés</li>
@@ -75,6 +91,11 @@ const LoginForm = () => {
             {invalidEntries && (
               <div className="control-error">
                 <p>*Identifiants invalides, veuillez réessayer.</p>
+              </div>
+            )}
+            {validEntries && (
+              <div className="control-valid">
+                <p>Blyat</p>
               </div>
             )}
             <button type="submit" className="creer">

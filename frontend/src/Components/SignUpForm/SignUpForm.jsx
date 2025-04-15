@@ -2,7 +2,14 @@ import { useState } from "react";
 import "../SignUpForm/SignUpForm.css";
 import { NavLink } from "react-router-dom";
 import Modal from "../Modal/Modal.jsx";
+import { useEffect } from "react";
 const SignUpForm = () => {
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
   const [passwordNotEqual, setPasswordNotEqual] = useState(false);
   const [afficherModal, setAfficherModal] = useState(false);
   const [mdpLength, setMdpLength] = useState(false);
@@ -42,7 +49,8 @@ const SignUpForm = () => {
 
   return (
     <>
-      <div className="connexion">
+     <div className={`connexion ${loaded ? "fade-in" : ""}`}>
+
         <div className="info">
           <h2>Restez connecté.</h2>
           <h3>Rejoignez des milliers de fans passionnés </h3>

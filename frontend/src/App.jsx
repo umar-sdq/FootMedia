@@ -9,6 +9,7 @@ import Notifications from './Components/Notifications/Notifications.jsx';
 import ErrorPage from './Components/Error/ErrorPage.jsx';
 import LoginForm from './Components/LoginForm/LoginForm.jsx';
 import SignUpForm from './Components/SignUpForm/SignUpForm.jsx';
+import { AuthProvider } from './Components/AuthContext/AuthContext.jsx';
 function App() {
   const router = createBrowserRouter([{
     path: "/",
@@ -27,10 +28,10 @@ function App() {
     
   ]);
   return (
-    <>
-    <RouterProvider router={router}/>
-    </>
-  )
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 
