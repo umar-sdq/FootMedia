@@ -6,6 +6,7 @@
     color: red;
     font-size: 12px;
     margin-top: 5px;
+    animation: fadeSlideIn 0.6s ease forwards;
   }
  
   .fade-in {

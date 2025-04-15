@@ -95,7 +95,7 @@ const LoginForm = () => {
             )}
             {validEntries && (
               <div className="control-valid">
-                <p>Blyat</p>
+                <p>bon</p>
               </div>
             )}
             <button type="submit" className="creer">

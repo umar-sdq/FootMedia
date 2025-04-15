@@ -3,8 +3,9 @@ import "../SignUpForm/SignUpForm.css";
 import { NavLink } from "react-router-dom";
 import Modal from "../Modal/Modal.jsx";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
-
+  const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const SignUpForm = () => {
   const [passwordNotEqual, setPasswordNotEqual] = useState(false);
   const [afficherModal, setAfficherModal] = useState(false);
   const [mdpLength, setMdpLength] = useState(false);
+  const [signedUp, setSignedUp] = useState(false);
 
    const handleChooseClick = () => {
     setAfficherModal(true);
@@ -41,6 +43,7 @@ const SignUpForm = () => {
       setMdpLength(true);
       return;
     }
+    setSignedUp(true);
     setMdpLength(false);
     setPasswordNotEqual(false);
     console.log(data);
@@ -49,9 +52,9 @@ const SignUpForm = () => {
 
   return (
     <>
+    {!signedUp && (
      <div className={`connexion ${loaded ? "fade-in" : ""}`}>
-
-        <div className="info">
+         <div className="info">
           <h2>Restez connecté.</h2>
           <h3>Rejoignez des milliers de fans passionnés </h3>
           <li>Partagez vos moments préférés</li>
@@ -119,11 +122,19 @@ const SignUpForm = () => {
             <button className="connexion">Connectez vous</button>
           </NavLink>
         </div>
-      </div>
+          
+        </div>
+      )}
+    {signedUp && (
+        <div className={`connexion ${loaded ? "fade-in" : ""}`}>
+
+          <p>Bienvenur</p>
+        </div>
+      )}
+        
       {afficherModal && (
         <div className="modal-overlay">
           <Modal
-            message="Choississez votre équipe préférée"
             onConfirm={() => setAfficherModal(false)}
             onCancel={() => setAfficherModal(false)}
           />
