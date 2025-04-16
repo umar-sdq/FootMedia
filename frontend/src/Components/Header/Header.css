@@ -91,13 +91,41 @@ button {
   
   .header.connection-faite .btn-login,
   .header.connection-faite .btn-signup {
-    animation: fadeOutUp 0.4s forwards;
+    animation: fadeOutUp 2s forwards;
   }
   
   .header.connection-faite .btn-logout {
-    animation: fadeInDown 0.4s ease forwards;
+    animation: fadeInDown 2s ease forwards;
   }
   
 
 
-  
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 65px;
+}
+
+.nav-icons .icon {
+  font-size: 1.3em;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+}
+
+.nav-icons .icon:hover {
+  color: #7e78e9;
+}
+
+.nav-icons .icon:active .btn-logout{
+  transform: scale(0.9);
+}
+
+.header.connection-faite .nav-icons {
+  animation: fadeInDown 1.5s ease forwards;
+}
+.nav-icons .btn-logout {
+  margin-top: 0px; 
+}

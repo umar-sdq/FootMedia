@@ -1,0 +1,15 @@
+.upload-file {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-top: 30px;
+  }
+  
+  .upload-file input[type="file"] {
+    display: none;
+  }
+  

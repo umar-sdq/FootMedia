@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Modal from "../Modal/Modal.jsx";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import footMedia from "../../assets/FMNoir.png";
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
@@ -126,10 +127,30 @@ const SignUpForm = () => {
         </div>
       )}
     {signedUp && (
-        <div className={`connexion ${loaded ? "fade-in" : ""}`}>
-
-          <p>Bienvenur</p>
-        </div>
+        <div className="connexion">
+        <div className="info">
+         <h2>Restez connecté.</h2>
+         <h3>Rejoignez des milliers de fans passionnés </h3>
+         <li>Partagez vos moments préférés</li>
+         <li>Commentez les matchs</li>
+         <li>découvrez les posts des supporters du monde entier</li>
+         <p>
+           Votre équipe. <br />
+           Votre mur. <br />
+           Votre communauté.
+         </p>
+       </div>
+       <div className={`user-pass ${loaded ? "fade-in-bv" : ""}`}>
+         
+        <img className="logo-confirmation" src={footMedia} alt="" />
+         <h2>Bienvenue sur FootMedia. <br />
+         La passion commence ici.</h2>
+         <NavLink to="/login">
+           <button className="connexion">Connectez vous</button>
+         </NavLink>
+       </div>
+         
+       </div>
       )}
         
       {afficherModal && (

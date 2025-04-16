@@ -129,5 +129,38 @@ text-align: left}
       opacity: 1;
       transform: translateY(0);
     }
+    
+
+    
   }
+  .fade-in-bv h2{
+    animation: fadeSlideInBv 4s ease forwards;
+}
+
+  @keyframes fadeSlideInBv {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+.fade-in-bv button{
+    animation: fadeSlideIn 4s ease forwards;
+  }
+
+
+  .logo-confirmation {
+    width: 100px;
+    height: auto;
+    margin: 0 auto 20px auto;
+    display: block;
+  }
+
+.fade-in-bv img {
+    animation: fadeSlideIn 4s ease forwards;
+}  
   
