@@ -1,0 +1,118 @@
+.post-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  
+.post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(to bottom right, #e5f1ff, #e8d4f3);
+    text-align: center;
+    animation: fadeSlideIn 0.6s ease forwards;
+  }
+  
+  .upload-file {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-top: 30px;
+  }
+  
+  .upload-file input[type="file"] {
+    display: none;
+  }
+  
+  .image-prev {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /*.post-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }*/
+  
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .btn-next,
+  .btn-cancel {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-next {
+    background-color: black;
+    color: white;
+  }
+  
+  .btn-next:hover {
+    background-color: #222;
+  }
+  
+  .btn-cancel {
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #2a0664;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #0a0331;
+    color: white;
+  }
+
+  .info-post {
+    display: flex;
+    gap: 0; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 80%;
+    max-width: 1000px;
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    background-color: rgb(255, 255, 255);
+    color: rgb(116, 110, 110);  }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import "./Feed.css";
-import UploadImage from "../UploadImage/UploadImage";
 
 const Feed = () => {
   const [loaded, setLoaded] = useState(false);
