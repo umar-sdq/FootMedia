@@ -16,6 +16,7 @@ const PostForm = () => {
   }
   function resetFile() {
     setFile(null);
+    setAfficherInfoPost(false);
   }
   function handleNext() {
     setAfficherInfoPost(true)
@@ -23,7 +24,7 @@ const PostForm = () => {
 
   return (
     <div className="post-container">
-      <div className={`post-form ${loaded ? "fade-in" : ""}`}>
+    <div className={`post-form ${loaded ? "fade-in" : ""} ${afficherInfoPost ? "form-side" : ""}`}>
         {!file && (
           <label className="upload-file">
             Choisir une photo ou vidéo
@@ -31,22 +32,34 @@ const PostForm = () => {
           </label>
         )}
   
-        {file && (
-          <>
-            <img src={file} alt="preview" className="image-prev" />
-            <div className="action-buttons">
-              <button className="btn-next" onClick={handleNext}>Suivant</button>
-              <button className="btn-cancel" onClick={resetFile}>Annuler</button>
-            </div>
-          </>
+        {file &&  (
+         <>
+         <img src={file} alt="preview" className="image-prev" />
+       
+         <div className="action-buttons">
+           {!afficherInfoPost && (
+             <button className="btn-next" onClick={handleNext}>Suivant</button>
+           )}
+           <button className="btn-cancel" onClick={resetFile}>Annuler</button>
+         </div>
+       </>
         )}
       </div>
   
-      {afficherInfoPost && (
-        <div className="info-post">
-          <p>test</p>
-        </div>
-      )}
+    {afficherInfoPost && (
+      <div className={`info-post ${loaded ? "fade-in-post" : ""}`}>
+        <h2>Partage ton moment</h2>
+    
+       <p>Légende</p>
+        <input type="text" id="caption" placeholder="Écris une légende..." />
+    
+        <label htmlFor="location">Lieu</label>
+        <input type="text" id="location" placeholder="Où a été pris ce moment ?" />
+    
+        <p className="slogan">⚽ Ton souvenir. Ta voix. Ta communauté.</p>
+      </div>
+    )}
+    
     </div>
   );
 };

@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 30px;
   }
   
 .post-form {
@@ -15,11 +14,15 @@
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-    padding: 20px;
-    background: linear-gradient(to bottom right, #e5f1ff, #e8d4f3);
+    padding: 5px;
+    background: rgb(3, 5, 56);
     text-align: center;
     animation: fadeSlideIn 0.6s ease forwards;
   }
+
+.post-form.form-side {
+  border-radius: 10px 0 0 10px;
+}
   
   .upload-file {
     padding: 10px 20px;
@@ -37,7 +40,6 @@
   
   .image-prev {
     display: block;
-    margin-top: 20px;
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
@@ -71,12 +73,10 @@
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 10px;
   }
   
   .btn-next,
   .btn-cancel {
-    padding: 10px 20px;
     font-size: 14px;
     border-radius: 20px;
     border: none;
@@ -90,13 +90,13 @@
   }
   
   .btn-next:hover {
-    background-color: #222;
+    background-color: #3e3e60;
   }
   
   .btn-cancel {
     background-color: transparent;
-    color: #000000;
-    border: 1px solid #2a0664;
+    color: #ffffff;
+    border: 1px solid #ffffff;
   }
   
   .btn-cancel:hover {
@@ -105,14 +105,29 @@
   }
 
   .info-post {
-    display: flex;
-    gap: 0; 
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 80%;
+    padding: 20px;
     max-width: 1000px;
-    margin: auto;
-    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    background-color: rgb(255, 255, 255);
-    color: rgb(116, 110, 110);  }
+    background: rgb(3, 5, 56);
+    border-radius: 10px 0 0 10px;
+
+      color: rgb(255, 255, 255);  
+    }
+    
+      @keyframes fadeDroite {
+      from {
+        opacity: 0;
+        transform: translatex(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translatex(0);
+      } 
+    }
+
+    .fade-in-post {
+      animation: fadeDroite 0.6s ease forwards;
+    }
+
+ 
