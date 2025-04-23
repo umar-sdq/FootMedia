@@ -27,7 +27,7 @@ import sheriff from '../../assets/UEFA/sheriff-tiraspol.svg';
 import sporting from '../../assets/UEFA/sporting-cp.svg';
 import { useEffect } from 'react';
 import { useState } from 'react';
-function Modal({ message, onConfirm, onCancel }) {
+function Modal({ onConfirm, onCancel, onSelectTeam }) {
     const [loaded, setLoaded] = useState(false);
     
       useEffect(() => {
@@ -39,14 +39,17 @@ function Modal({ message, onConfirm, onCancel }) {
         juventus, liverpool, lille, malmo, manCity, psg,
         leipzig, realMadrid, salzburg, sevilla, shakhtar, sheriff, sporting
       ];
+
+      const handleSelect = (logo) => () => {
+        onSelectTeam(logo);
+        console.log("Selected team logo:", logo);
+      }
       
   return (
     <div className={`pos-modal ${loaded ? "fade-in" : ""}`}>
-        <h3>{message}</h3>
-        
         <div className='logo-equipe'>
         {teams.map((logo, index) => (
-    <button key={index} className="team-button">
+    <button key={index} className="team-button" onClick={handleSelect(logo)}>
       <img src={logo} alt={`team-${index}`} />
     </button>
   ))}

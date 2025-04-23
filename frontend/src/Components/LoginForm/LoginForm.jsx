@@ -38,7 +38,12 @@ const LoginForm = () => {
       }
 
       console.log("Connecté !", result);
-      auth.login();
+      auth.login({
+        userId: result.userId,
+        username: result.username,
+        token: result.token,
+        favoriteTeam: result.favoriteTeam
+    });
       navigate("/");
       setvalidEntries(true); 
       setinvalidEntries(false);

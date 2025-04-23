@@ -129,3 +129,10 @@ button {
 .nav-icons .btn-logout {
   margin-top: 0px; 
 }
+.team-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+}

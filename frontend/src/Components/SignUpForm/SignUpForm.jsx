@@ -16,6 +16,8 @@ const SignUpForm = () => {
   const [afficherModal, setAfficherModal] = useState(false);
   const [mdpLength, setMdpLength] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
+  const [userExists, setUserExists] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState("");
 
    const handleChooseClick = () => {
     setAfficherModal(true);
@@ -23,13 +25,26 @@ const SignUpForm = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-
+    const entries = Object.fromEntries(fd.entries());
+    const data = {
+      ...entries,
+      favoriteTeam: selectedTeam
+    };
+    
+  
     if (data.password !== data["confirm-password"]) {
       setPasswordNotEqual(true);
       return;
     }
+  
+    if (data.password.length < 6) {
+      setMdpLength(true);
+      return;
+    }
+  
     try {
+      console.log("Selected team:", selectedTeam);
+      console.log("Data sent to backend:", data);
       const response = await fetch("http://localhost:5001/api/users/signup", {
         method: "POST",
         headers: {
@@ -37,19 +52,25 @@ const SignUpForm = () => {
         },
         body: JSON.stringify(data),
       });
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(result.message);
+      }
+  
+      setSignedUp(true);
+      setMdpLength(false);
+      setPasswordNotEqual(false);
+      setUserExists(false);
+      event.target.reset();
+  
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
+      setUserExists(err.message);
     }
-    if (data.password.length < 6) {
-      setMdpLength(true);
-      return;
-    }
-    setSignedUp(true);
-    setMdpLength(false);
-    setPasswordNotEqual(false);
-    console.log(data);
-    event.target.reset();
   }
+  
 
   return (
     <>
@@ -91,6 +112,11 @@ const SignUpForm = () => {
               {mdpLength && (
                 <div>
                   <p>*Le mot de passe doit contenir au moins 6 caractères</p>
+                </div>
+              )}
+              {userExists && (
+                <div className="control-error">
+                  <p>*Nom d'utilisateur déjà utilisé</p>
                 </div>
               )}
             </div>
@@ -158,6 +184,8 @@ const SignUpForm = () => {
           <Modal
             onConfirm={() => setAfficherModal(false)}
             onCancel={() => setAfficherModal(false)}
+            onSelectTeam={(logo) => setSelectedTeam(logo)}
+
           />
         </div>
       )}
