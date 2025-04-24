@@ -29,7 +29,6 @@ const signUp = async (req, res, next) => {
         const error = new HttpError("La création de l'utilisateur a échoué, veuillez réessayer plus tard.", 500);
         return next(error);
     }
-    console.log("🏁 Valeurs reçues dans le backend:", { username, password, favoriteTeam });
 
     const createdUser = new User({
         username,
