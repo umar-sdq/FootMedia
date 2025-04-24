@@ -46,11 +46,12 @@ const createPost = async (req, res, next) => {
     if (!validationErrors.isEmpty()) {
         return next(new HttpError('Données entrées invalides.', 422));
     }
-    const { userId, caption, image } = req.body;
+    const { userId, caption, image, location } = req.body; 
     const createdPost = new Post({
         userId,
         caption,
         image,
+        location, 
         likes: [],
         comments: [],
         creationTime: Date.now()

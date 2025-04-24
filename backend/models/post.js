@@ -1,11 +1,13 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
-  caption: { type: String, required: true },
-  image: { type: String, default: "" },
-  likes: { type: Array, default: [] },
-  comments: { type: Array, default: [] },
-  creationTime: { type: Date, default: Date.now },
-}); 
-export default mongoose.model("Post", postSchema);
+    userId: { type: String, required: true },
+    caption: { type: String, required: true },
+    image: { type: String, required: true },
+    location: { type: String, required: true },
+    likes: [{ type: String }],
+    comments: [{ type: String }],
+    creationTime: { type: Date, default: Date.now }
+});
+
+export default mongoose.model('Post', postSchema);

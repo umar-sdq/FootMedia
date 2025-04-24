@@ -8,6 +8,12 @@ const userSchema = new mongoose.Schema({
   followers: { type: Array, default: [] },
   following: { type: Array, default: [] },
   biographie: { type: String, default: "" },
+  posts : [
+    {
+      type: String,
+      required: true,
+    }
+  ]
 });
 
 export default mongoose.model("User", userSchema);

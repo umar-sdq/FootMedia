@@ -15,7 +15,7 @@ const signUp = async (req, res, next) => {
         console.log(validationErrors);
         return next(new HttpError("Données entrées invalides", 422));
     }
-    const {username, password, favoriteTeam} = req.body;
+    const {username, password, favoriteTeam, profilePic, followers, following, biographie, posts} = req.body;
 
     let existingUser;
     try {
@@ -33,7 +33,12 @@ const signUp = async (req, res, next) => {
     const createdUser = new User({
         username,
         password,
-        favoriteTeam
+        favoriteTeam,
+        profilePic,
+        followers,
+        following,
+        biographie,
+        posts
     })
     try {
         await createdUser.save();
@@ -53,11 +58,7 @@ const signUp = async (req, res, next) => {
         const error = new HttpError("La création du utilisateur a été echoué, veuillez reessayez plus tard.", 500)
         return next(error)
     }
-    res.status(201).json({
-        userId: createdUser.id,
-        username: createdUser.username,
-        favoriteTeam: createdUser.favoriteTeam,
-        token: token
+    res.status(201).json({ createdUser: createdUser.toObject({ getters: true })
     });
 
     
