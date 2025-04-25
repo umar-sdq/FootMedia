@@ -36,7 +36,7 @@ const Header = () => {
             </NavLink>
           </>
         )}
-
+ 
         {auth.isLoggedIn && (
           <div className="nav-icons">
             {auth.userData?.favoriteTeam && (

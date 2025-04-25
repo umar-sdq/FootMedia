@@ -1,7 +1,10 @@
 import "../PostForm/PostForm.css";
 import { useState, useEffect } from "react";
-
+import FootMedia from "../../assets/FootMedia.png";
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext/AuthContext.jsx";
 const PostForm = () => {
+  const auth = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [afficherInfoPost, setAfficherInfoPost] = useState(false);
@@ -21,7 +24,7 @@ const PostForm = () => {
   function handleNext() {
     setAfficherInfoPost(true)
   }
-
+  function handleCreate(){}
   return (
     <div className="post-container">
     <div className={`post-form ${loaded ? "fade-in" : ""} ${afficherInfoPost ? "form-side" : ""}`}>
@@ -48,15 +51,17 @@ const PostForm = () => {
   
     {afficherInfoPost && (
       <div className={`info-post ${loaded ? "fade-in-post" : ""}`}>
+        <p>{auth.userData.username}</p>
+        <img className="logo-confirmation"src={FootMedia} alt="" />
         <h2>Partage ton moment</h2>
     
-       <p>Légende</p>
-        <input type="text" id="caption" placeholder="Écris une légende..." />
+        <input type="text" id="caption" placeholder="Legende" />
     
-        <label htmlFor="location">Lieu</label>
-        <input type="text" id="location" placeholder="Où a été pris ce moment ?" />
+        <input type="text" id="location" placeholder="Ajouter la location" />
     
-        <p className="slogan">⚽ Ton souvenir. Ta voix. Ta communauté.</p>
+        <p className="slogan">Ton souvenir. Ta voix. Ta communauté.</p>
+        <button className="btn-publier" onClick={handleCreate}>Publier</button>
+
       </div>
     )}
     
