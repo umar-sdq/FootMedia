@@ -11,7 +11,6 @@ const Header = () => {
   const [afficherPostForm, setAfficherPostForm] = useState(false);
 
   useEffect(() => {
-    console.log("🔍 AuthContext userData:", auth.userData);
   }, [auth.userData]);
 
   const handlePostForm = () => {

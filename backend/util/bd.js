@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 let isConnected = false;
-const uri = "mongodb+srv://umarsdq06:<db_password>@cluster-footmedia.b73koxc.mongodb.net/?retryWrites=true&w=majority&appName=cluster-footmedia";
+const uri = "mongodb+srv://umarsdq06:footmedia@cluster-footmedia.b73koxc.mongodb.net/?retryWrites=true&w=majority&appName=cluster-footmedia";
 
 export const connectDB = async () => {
     if (isConnected) return{
