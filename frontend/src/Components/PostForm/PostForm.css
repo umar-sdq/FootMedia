@@ -125,8 +125,33 @@
       color: rgb(255, 255, 255);
       padding-bottom: 123px;  
     }
-    
-    
+    .info-post h2 {
+      margin-top: 50px;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .info-post p {
+      margin-bottom: 20px;
+    }
+    .logo-confirmation {
+      top: 10px;
+      left: 10px;
+      height: 10px;
+      position: absolute;
+  width: 10px;
+  object-fit: cover;
+  border-radius: 50%;
+    }
+
+    .info-post img {
+      width: 15%;
+      height: 15%;
+      object-fit: cover;
+      border-radius: 50%;
+      top : 25px;
+      left: 30px;
+      position: absolute;
+    }
 
     .fade-in-post {
       animation: fadeDroite 0.6s ease forwards;
@@ -135,7 +160,6 @@
     .btn-publier{
       background-color: black;
     color: white;
-    margin-top: 120px;
     }
     .btn-publier:hover{
       background-color: #060223;
