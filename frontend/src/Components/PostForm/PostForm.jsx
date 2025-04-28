@@ -7,6 +7,7 @@ const PostForm = () => {
   const [file, setFile] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [afficherInfoPost, setAfficherInfoPost] = useState(false);
+  const [userPosts, setUserPosts] = useState([]); 
 
   useEffect(() => {
     setLoaded(true);
@@ -47,9 +48,30 @@ const PostForm = () => {
       }
 
       console.log("Post créé avec succès !");
-      console.log(body)
     } catch (err) {
-      console.error(" Erreur lors de la création du post:", err);
+      console.error("Erreur lors de la création du post:", err);
+    }
+  }
+
+  async function handleAfficher() {
+    try {
+      const response = await fetch(`http://localhost:5001/api/posts/user/${auth.userData.userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des posts");
+      }
+
+      const data = await response.json();
+      setUserPosts(data.posts); 
+      console.log(data);
+    } catch (err) {
+      console.error("Erreur lors de la récupération des posts:", err);
     }
   }
 
@@ -69,9 +91,13 @@ const PostForm = () => {
               <img src={file} alt="preview" className="image-prev" />
               <div className="action-buttons">
                 {!afficherInfoPost && (
-                  <button className="btn-next" onClick={handleNext}>Suivant</button>
+                  <button className="btn-next" onClick={handleNext}>
+                    Suivant
+                  </button>
                 )}
-                <button className="btn-cancel" onClick={resetFile}>Annuler</button>
+                <button className="btn-cancel" onClick={resetFile}>
+                  Annuler
+                </button>
               </div>
             </>
           )}
@@ -85,7 +111,23 @@ const PostForm = () => {
             <input type="text" id="caption" placeholder="Légende" />
             <input type="text" id="location" placeholder="Ajouter la location" />
             <p className="slogan">Ton souvenir. Ta voix. Ta communauté.</p>
-            <button className="btn-publier" onClick={handleCreate}>Publier</button>
+            <button className="btn-publier" onClick={handleCreate}>
+              Publier
+            </button>
+            <button onClick={handleAfficher}>Afficher</button>
+
+            {userPosts.length > 0 && (
+              <div className="posts-liste">
+                <h3>Mes publications :</h3>
+                <ul>
+                  {userPosts.map((post) => (
+                    <li key={post.id}>
+                      {post.caption} - {post.location}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </div>
