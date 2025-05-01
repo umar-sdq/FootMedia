@@ -5,9 +5,10 @@ const router = express.Router()
 
 router.get("/", postsController.getPosts);
 
+router.get("/user/:userId", postsController.getPostByUserId);
+
 router.get("/:postId", postsController.getPostById);
 
-router.get("/user/:userId", postsController.getPostByUserId)
 
 
 router.post(
