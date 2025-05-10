@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import "./Profile.css";
 import { AuthContext } from "../AuthContext/AuthContext";
 const Profile = () => {
     const auth = useContext(AuthContext);
@@ -37,13 +38,17 @@ const Profile = () => {
                 <p>Abonnées: {auth.userData.followers?.length || 0}</p>
                 <p>Abonnements: {auth.userData.following?.length || 0}</p>
                 <p>biographie {auth.userData.biographie}</p>
-                <ul>
-                  {userPosts.map((post) => (
-                    <li key={post.id}>
-                      {post.caption} - {post.location}
-                    </li>
-                  ))}
-                </ul>
+                <div className="profile-posts">
+  {Array.isArray(userPosts) &&
+    userPosts.map((post) => (
+      <img
+        key={post.id}
+        src={post.image}
+        alt="post"
+        className="post-profile-image"
+      />
+    ))}
+</div>
               </>
             ) : (
               <p>Veuillez vous connecter pour voir votre profil.</p>

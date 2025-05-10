@@ -9,7 +9,7 @@ const getPosts = async (req, res, next) => {
   if (!posts) {
     return next(new HttpError('Aucune publication', 404));
   }
-  res.json(posts);
+  res.json(posts.map(post => post.toObject({ getters: true })));
 };
 
 const getPostById = async (req, res, next) => {
@@ -63,6 +63,8 @@ const createPost = async (req, res, next) => {
     caption,
     image,
     location,
+    username: user.username,
+    favoriteTeam: user.favoriteTeam,
     likes: [],
     comments: [],
     creationTime: Date.now()

@@ -1,0 +1,14 @@
+.post-profile-image {
+    width: 100%;              
+    max-width: 300px;         
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .profile-posts {
+    border: 2px white solid;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    padding: 10px;
+    gap: 5px;
+  }

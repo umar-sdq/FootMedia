@@ -1,0 +1,67 @@
+.post-card {
+    background-color: #000;
+    border-radius: 12px;
+    margin: 10px auto;
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  
+  .post-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-bottom: 1px solid #222;
+  }
+  
+  .post-info-texts {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .post-team-logo {
+    max-width: 55px;
+    max-height: 55px;
+  }
+  
+  
+  .username {
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    margin-right: auto;
+  }
+  
+  .location {
+    font-size: 13px;
+    color: #ccc;
+  }
+  
+  .post-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .post-card-content {
+    padding: 16px;
+    text-align: left;
+  }
+  
+  .post-card-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: white;
+  }
+  .icons{
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+    height: 30px;
+    
+  }

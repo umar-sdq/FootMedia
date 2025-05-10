@@ -1,22 +1,21 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
 import "./Feed.css";
+import PostCard from "../PostCard/PostCard";
 
 const Feed = () => {
-    const auth = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const [loaded, setLoaded] = useState(false);
-  const [userPosts, setUserPosts] = useState([]); 
+  const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
     setLoaded(true);
     handleAfficher();
-
   }, []);
+
   async function handleAfficher() {
     try {
-      const response = await fetch("http://localhost:5001/api/posts/",{
+      const response = await fetch("http://localhost:5001/api/posts/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -36,23 +35,14 @@ const Feed = () => {
   }
 
   return (
-    <>
-
-      <div className={`feed ${loaded ? "fade-in" : ""}`}>
-        <h1>Feed</h1> 
-
-        <ul>
-  {Array.isArray(userPosts) && userPosts.map((post) => (
-    <li key={post.id}>
-      <img src={post.image} alt="post" style={{ width: "300px", borderRadius: "10px" }} />
-      <p>{post.caption} - {post.location}</p>
-    </li>
-  ))}
-</ul>
-
-       
+    <div className={`feed ${loaded ? "fade-in" : ""}`}>
+      <div className="liste-posts">
+        {Array.isArray(userPosts) &&
+          userPosts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
       </div>
-    </>
+    </div>
   );
 };
 
