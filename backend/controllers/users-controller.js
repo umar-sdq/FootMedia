@@ -3,12 +3,20 @@ import HttpError from "../util/http-error.js";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
-let USERS = [];
 
-const getUsers = (req, res, next) => {
-    res.json({ USERS });
-};
-
+const getUsers = async (req, res, next) => {
+    let users;
+    try {
+      users = await User.find(); 
+    } catch (err) {
+      return next(new HttpError("Échec de récupération des utilisateurs", 500));
+    }
+  
+    res.status(200).json({
+      users: users.map(user => user.toObject({ getters: true }))
+    });
+  };
+  
 const signUp = async (req, res, next) => {
     const validationErrors = validationResult(req)
     if (!validationErrors.isEmpty()) {

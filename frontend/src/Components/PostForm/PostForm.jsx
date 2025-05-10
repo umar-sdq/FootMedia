@@ -10,6 +10,8 @@ const PostForm = () => {
   const [loaded, setLoaded] = useState(false);
   const [afficherInfoPost, setAfficherInfoPost] = useState(false);
   const [userPosts, setUserPosts] = useState([]); 
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     setLoaded(true);
@@ -32,6 +34,7 @@ const PostForm = () => {
 
   async function handleCreate() {
     try {
+      setIsLoading(true);
       const fileName = Date.now() + "_" + file.name;
       const upload = await supabase.storage.from("photo-posts").upload(fileName, file);
     if (upload.error) {
@@ -61,6 +64,8 @@ const PostForm = () => {
       navigate("/")
     } catch (err) {
       console.error("Erreur lors de la création du post:", err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -123,6 +128,7 @@ const PostForm = () => {
             <input type="text" id="caption" placeholder="Légende" />
             <input type="text" id="location" placeholder="Ajouter la location" />
             <p className="slogan">Ton souvenir. Ta voix. Ta communauté.</p>
+            {isLoading && <div className="spinner"></div>}
             <button className="btn-publier" onClick={handleCreate}>
               Publier
             </button>
