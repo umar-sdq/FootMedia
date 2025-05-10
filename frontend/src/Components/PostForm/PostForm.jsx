@@ -2,6 +2,7 @@ import "../PostForm/PostForm.css";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext.jsx";
 import supabase from "../../../../backend/util/supabase.js";
+import { useNavigate } from "react-router-dom";
 const PostForm = () => {
   const auth = useContext(AuthContext);
   const [file, setFile] = useState(null);
@@ -9,20 +10,19 @@ const PostForm = () => {
   const [loaded, setLoaded] = useState(false);
   const [afficherInfoPost, setAfficherInfoPost] = useState(false);
   const [userPosts, setUserPosts] = useState([]); 
-
+  const navigate = useNavigate();
   useEffect(() => {
     setLoaded(true);
   }, []);
 
   function getFile(event) {
-    const selectedFile = URL.createObjectURL(event.target.files[0]);
-    setFile(selectedFile);
-    setFilePreview(URL.createObjectURL(selectedFile));
+    setFile(event.target.files[0]);
+    setFilePreview(URL.createObjectURL(event.target.files[0]));
+
   }
 
   function resetFile() {
     setFile(null);
-    setFilePreview(null);
     setAfficherInfoPost(false);
   }
 
@@ -32,9 +32,13 @@ const PostForm = () => {
 
   async function handleCreate() {
     try {
-      if (!file) {
-        throw new Error("Aucun fichier sélectionné");
-      }
+      const fileName = Date.now() + "_" + file.name;
+      const upload = await supabase.storage.from("photo-posts").upload(fileName, file);
+    if (upload.error) {
+      throw new Error("Erreur lors de l'upload de l'image");
+    }
+    const imageUrl = supabase.storage.from("photo-posts").getPublicUrl(fileName).data.publicUrl;
+
       const response = await fetch("http://localhost:5001/api/posts/", {
         method: "POST",
         headers: {
@@ -45,7 +49,7 @@ const PostForm = () => {
           userId: auth.userData.userId,
           caption: document.getElementById("caption").value,
           location: document.getElementById("location").value,
-          image: file,
+          image: imageUrl,
         }),
       });
 
@@ -54,6 +58,7 @@ const PostForm = () => {
       }
 
       console.log("Post créé avec succès !");
+      navigate("/")
     } catch (err) {
       console.error("Erreur lors de la création du post:", err);
     }
@@ -94,7 +99,8 @@ const PostForm = () => {
 
           {file && (
             <>
-              <img src={file} alt="preview" className="image-prev" />
+              <img src={filePreview} alt="preview" className="image-prev" />
+
               <div className="action-buttons">
                 {!afficherInfoPost && (
                   <button className="btn-next" onClick={handleNext}>

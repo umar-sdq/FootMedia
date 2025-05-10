@@ -44,7 +44,8 @@ const Feed = () => {
         <ul>
   {Array.isArray(userPosts) && userPosts.map((post) => (
     <li key={post.id}>
-      {post.caption} - {post.location}
+      <img src={post.image} alt="post" style={{ width: "300px", borderRadius: "10px" }} />
+      <p>{post.caption} - {post.location}</p>
     </li>
   ))}
 </ul>
