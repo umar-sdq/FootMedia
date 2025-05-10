@@ -1,10 +1,11 @@
 import "../PostForm/PostForm.css";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext.jsx";
-
+import supabase from "../../../../backend/util/supabase.js";
 const PostForm = () => {
   const auth = useContext(AuthContext);
   const [file, setFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [afficherInfoPost, setAfficherInfoPost] = useState(false);
   const [userPosts, setUserPosts] = useState([]); 
@@ -16,10 +17,12 @@ const PostForm = () => {
   function getFile(event) {
     const selectedFile = URL.createObjectURL(event.target.files[0]);
     setFile(selectedFile);
+    setFilePreview(URL.createObjectURL(selectedFile));
   }
 
   function resetFile() {
     setFile(null);
+    setFilePreview(null);
     setAfficherInfoPost(false);
   }
 
@@ -29,6 +32,9 @@ const PostForm = () => {
 
   async function handleCreate() {
     try {
+      if (!file) {
+        throw new Error("Aucun fichier sélectionné");
+      }
       const response = await fetch("http://localhost:5001/api/posts/", {
         method: "POST",
         headers: {
