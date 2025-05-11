@@ -8,7 +8,7 @@ const Feed = () => {
   const [loaded, setLoaded] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [users, setUsers] = useState([]);
-
+  const [suggestionsLoaded, setSuggestionsLoaded] = useState(false); 
   useEffect(() => {
     setLoaded(true);
     handleAfficher();
@@ -53,6 +53,7 @@ const Feed = () => {
       const selected = shuffled.slice(0, 15);
 
       setUsers(selected);
+      setSuggestionsLoaded(true); 
     } catch (err) {
       console.error("Erreur users:", err);
     }
@@ -68,19 +69,22 @@ const Feed = () => {
       </div>
 
       <div className="feed-sidebar">
-        <h2>Suggestions</h2>
-        <ul className="suggestions-list">
-          {users.map((user) => (
-            <li key={user._id}>
-            <div className="username-suggestion">
-              <img src={user.favoriteTeam} alt="logo" className="suggestion-logo" />
-              {user.username}
-            </div>
-            <button className="follow">suivre</button>
-          </li>
-          
-          ))}
-        </ul>
+        {suggestionsLoaded && ( 
+          <>
+            <h2>Suggestions</h2>
+            <ul className="suggestions-list">
+              {users.map((user) => (
+                <li key={user._id}>
+                  <div className="username-suggestion">
+                    <img src={user.favoriteTeam} alt="logo" className="suggestion-logo" />
+                    {user.username}
+                  </div>
+                  <button className="follow">suivre</button>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </div>
   );
