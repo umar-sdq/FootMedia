@@ -8,7 +8,8 @@ const Feed = () => {
   const [loaded, setLoaded] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [suggestionsLoaded, setSuggestionsLoaded] = useState(false); 
+  const [suggestionsLoaded, setSuggestionsLoaded] = useState(false); // New state for suggestions
+
   useEffect(() => {
     setLoaded(true);
     handleAfficher();

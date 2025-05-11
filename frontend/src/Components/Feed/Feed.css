@@ -18,11 +18,13 @@
       .feed-container {
         display: flex;
         gap: 30px;
-      }
+        width: 80vw; 
+        }
       
       .feed-main {
         flex: 3;
         padding-right: 10px;
+        min-width: 0;
       }
       
       .feed-sidebar {
@@ -76,3 +78,4 @@
       .follow:hover {
         color: white;
       }
+      
