@@ -2,13 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
 import PostCard from "../PostCard/PostCard";
 import "./Feed.css";
+import { useTranslation } from "react-i18next";
 
 const Feed = () => {
+  const { t } = useTranslation();
   const auth = useContext(AuthContext);
   const [loaded, setLoaded] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [suggestionsLoaded, setSuggestionsLoaded] = useState(false); // New state for suggestions
+  const [suggestionsLoaded, setSuggestionsLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
@@ -54,7 +56,7 @@ const Feed = () => {
       const selected = shuffled.slice(0, 15);
 
       setUsers(selected);
-      setSuggestionsLoaded(true); 
+      setSuggestionsLoaded(true);
     } catch (err) {
       console.error("Erreur users:", err);
     }
@@ -70,9 +72,9 @@ const Feed = () => {
       </div>
 
       <div className="feed-sidebar">
-        {suggestionsLoaded && ( 
+        {suggestionsLoaded && (
           <>
-            <h2>Suggestions</h2>
+            <h2>{t("suggestions")}</h2>
             <ul className="suggestions-list">
               {users.map((user) => (
                 <li key={user._id}>
@@ -80,7 +82,7 @@ const Feed = () => {
                     <img src={user.favoriteTeam} alt="logo" className="suggestion-logo" />
                     {user.username}
                   </div>
-                  <button className="follow">suivre</button>
+                  <button className="follow">{t("follow")}</button>
                 </li>
               ))}
             </ul>

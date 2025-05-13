@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Modal.css';
 import acMilan from '../../assets/UEFA/ac-milan.svg';
 import ajax from '../../assets/UEFA/ajax.svg';
@@ -25,40 +25,40 @@ import sevilla from '../../assets/UEFA/sevilla.svg';
 import shakhtar from '../../assets/UEFA/shakhtar-donetsk.svg';
 import sheriff from '../../assets/UEFA/sheriff-tiraspol.svg';
 import sporting from '../../assets/UEFA/sporting-cp.svg';
-import { useEffect } from 'react';
-import { useState } from 'react';
-function Modal({ onConfirm, onCancel, onSelectTeam }) {
-    const [loaded, setLoaded] = useState(false);
-    
-      useEffect(() => {
-        setLoaded(true);
-      }, []);
-    const teams = [
-        acMilan, ajax, atalanta, atleticoMadrid, barcelona, bayern,
-        benfica, besiktas, clubBrugge, dynamoKiyv, fcPorto, interMilan,
-        juventus, liverpool, lille, malmo, manCity, psg,
-        leipzig, realMadrid, salzburg, sevilla, shakhtar, sheriff, sporting
-      ];
+import { useTranslation } from 'react-i18next';
 
-      const handleSelect = (logo) => () => {
-        onSelectTeam(logo);
-        console.log("Selected team logo:", logo);
-      }
-      
+function Modal({ onConfirm, onCancel, onSelectTeam }) {
+  const { t } = useTranslation();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
+  const teams = [
+    acMilan, ajax, atalanta, atleticoMadrid, barcelona, bayern,
+    benfica, besiktas, clubBrugge, dynamoKiyv, fcPorto, interMilan,
+    juventus, liverpool, lille, malmo, manCity, psg,
+    leipzig, realMadrid, salzburg, sevilla, shakhtar, sheriff, sporting
+  ];
+
+  const handleSelect = (logo) => () => {
+    onSelectTeam(logo);
+    console.log("Selected team logo:", logo);
+  };
+
   return (
     <div className={`pos-modal ${loaded ? "fade-in" : ""}`}>
-        <div className='logo-equipe'>
+      <div className='logo-equipe'>
         {teams.map((logo, index) => (
-    <button key={index} className="team-button" onClick={handleSelect(logo)}>
-      <img src={logo} alt={`team-${index}`} />
-    </button>
-  ))}
-        </div>
-        
-          <button className="confirmer" onClick={onConfirm}>Confirmer</button>
-          <button className="annuler" onClick={onCancel}>Annuler</button>
-
-        </div>
+          <button key={index} className="team-button" onClick={handleSelect(logo)}>
+            <img src={logo} alt={`team-${index}`} />
+          </button>
+        ))}
+      </div>
+      <button className="confirmer" onClick={onConfirm}>{t("confirm")}</button>
+      <button className="annuler" onClick={onCancel}>{t("cancel")}</button>
+    </div>
   );
 }
 

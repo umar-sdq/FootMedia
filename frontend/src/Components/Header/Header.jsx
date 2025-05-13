@@ -5,16 +5,21 @@ import { NavLink } from "react-router-dom";
 import { FaPlus, FaUser, FaBell } from "react-icons/fa";
 import "./Header.css";
 import PostForm from "../PostForm/PostForm.jsx";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const auth = useContext(AuthContext);
   const [afficherPostForm, setAfficherPostForm] = useState(false);
 
-  useEffect(() => {
-  }, [auth.userData]);
+  useEffect(() => {}, [auth.userData]);
 
   const handlePostForm = () => {
     setAfficherPostForm(true);
+  };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
   };
 
   return (
@@ -25,18 +30,23 @@ const Header = () => {
         </div>
       </NavLink>
 
+      <div className="language-switch">
+        <button onClick={() => changeLanguage("fr")}>FR</button>
+        <button onClick={() => changeLanguage("en")}>EN</button>
+      </div>
+
       <div className="authentification">
         {!auth.isLoggedIn && (
           <>
             <NavLink to="/login">
-              <button className="btn-login">Log in</button>
+              <button className="btn-login">{t("login")}</button>
             </NavLink>
             <NavLink to="/signup">
-              <button className="btn-signup signup">Sign up</button>
+              <button className="btn-signup signup">{t("register")}</button>
             </NavLink>
           </>
         )}
- 
+
         {auth.isLoggedIn && (
           <div className="nav-icons">
             {auth.userData?.favoriteTeam && (
@@ -57,7 +67,7 @@ const Header = () => {
               <FaBell className="icon" />
             </NavLink>
             <button className="btn-logout logout" onClick={auth.logout}>
-              Log out
+              {t("logout")}
             </button>
           </div>
         )}
