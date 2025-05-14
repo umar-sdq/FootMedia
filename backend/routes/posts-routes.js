@@ -19,6 +19,6 @@ router.patch(
     "/:jid", postsController.updatePost
 );
 
-router.delete("/:jid", postsController.deletePost);
+router.delete("/:postId", postsController.deletePost);
 
 export default router;

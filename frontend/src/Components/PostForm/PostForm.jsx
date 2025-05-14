@@ -38,12 +38,26 @@ const PostForm = () => {
   async function handleCreate() {
     try {
       setIsLoading(true);
-      const fileName = Date.now() + "_" + file.name;
-      const upload = await supabase.storage.from("photo-posts").upload(fileName, file);
-      if (upload.error) {
+      const sanitizedName = file.name
+        .replace(/\s+/g, "_")
+        .replace(/[^a-zA-Z0-9_.-]/g, "");
+      const fileName = Date.now() + "_" + sanitizedName;
+
+      const { error } = await supabase.storage
+        .from("photo-posts")
+        .upload(fileName, file, {
+          upsert: true,
+          contentType: file.type,
+        });
+
+      if (error) {
+        console.error("Supabase Upload Error:", error);
         throw new Error("Erreur lors de l'upload de l'image");
       }
-      const imageUrl = supabase.storage.from("photo-posts").getPublicUrl(fileName).data.publicUrl;
+
+      const imageUrl = supabase.storage
+        .from("photo-posts")
+        .getPublicUrl(fileName).data.publicUrl;
 
       const response = await fetch("http://localhost:5001/api/posts/", {
         method: "POST",
@@ -74,13 +88,16 @@ const PostForm = () => {
 
   async function handleAfficher() {
     try {
-      const response = await fetch(`http://localhost:5001/api/posts/user/${auth.userData.userId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.token}`,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:5001/api/posts/user/${auth.userData.userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération des posts");
@@ -96,7 +113,11 @@ const PostForm = () => {
   return (
     <>
       <div className="post-container">
-        <div className={`post-form ${loaded ? "fade-in" : ""} ${afficherInfoPost ? "form-side" : ""}`}>
+        <div
+          className={`post-form ${loaded ? "fade-in" : ""} ${
+            afficherInfoPost ? "form-side" : ""
+          }`}
+        >
           {!file && (
             <label className="upload-file">
               {t("upload")}
@@ -124,7 +145,11 @@ const PostForm = () => {
         {afficherInfoPost && (
           <div className={`info-post ${loaded ? "fade-in-post" : ""}`}>
             <p>{auth.userData.username}</p>
-            <img className="logo-confirmation" src={auth.userData.favoriteTeam} alt="Favorite team" />
+            <img
+              className="logo-confirmation"
+              src={auth.userData.favoriteTeam}
+              alt="Favorite team"
+            />
             <h2>{t("share_moments")}</h2>
             <input type="text" id="caption" placeholder={t("caption")} />
             <input type="text" id="location" placeholder={t("location")} />

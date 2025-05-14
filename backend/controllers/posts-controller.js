@@ -106,6 +106,7 @@ const updatePost = async (req, res, next) => {
 const deletePost = async (req, res, next) => {
   const postId = req.params.postId;
   let post;
+
   try {
     post = await Post.findById(postId).populate('userId');
     if (!post) {
@@ -118,16 +119,17 @@ const deletePost = async (req, res, next) => {
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
-    await post.deleteOne({ session });
-    post.userId.posts.pull(post);
-    await post.userId.save({ session });
+
+    await Post.findByIdAndDelete(postId, { session });
+
     await session.commitTransaction();
+    res.status(200).json({ message: 'Publication supprimée' });
   } catch (err) {
     return next(new HttpError('Erreur de suppression de la publication', 500));
   }
-
-  res.status(200).json({ message: 'Publication supprimée' });
 };
+
+
 
 export default {
   getPosts,

@@ -17,7 +17,9 @@ const Feed = () => {
     handleAfficher();
     handleFetchUsers();
   }, []);
-
+  const handleRemove = (id) => {
+    setUserPosts((prev) => prev.filter((p) => p._id !== id));
+  };
   async function handleAfficher() {
     try {
       const response = await fetch("http://localhost:5001/api/posts/", {
@@ -67,7 +69,8 @@ const Feed = () => {
       <div className="feed-main">
         <div className="liste-posts">
           {Array.isArray(userPosts) &&
-            userPosts.map((post) => <PostCard key={post.id} post={post} />)}
+            userPosts.map((post) => <PostCard key={post._id} post={post} onDelete={() => handleRemove(post._id)} />
+          )}
         </div>
       </div>
 

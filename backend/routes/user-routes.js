@@ -13,4 +13,4 @@ router.post("/signup",
 
 router.post("/login", usersController.loginUser);
 router.get("/", usersController.getUsers)
-export default router;
+export default router; 
