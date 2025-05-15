@@ -1,18 +1,25 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 let isConnected = false;
-const uri = "mongodb+srv://umarsdq06:footmedia@cluster-footmedia.b73koxc.mongodb.net/Footmedia-db?retryWrites=true&w=majority&appName=cluster-footmedia";
 
 export const connectDB = async () => {
-    if (isConnected) return{
-       uri
-    }
-    try {
-        await mongoose.connect(uri)
-        isConnected = true;
-        console.log('Base de donnée MongoDB connectée');
-    } catch (err) {
-        console.log('Erreur de connexion à MongoDB', err.message);
-        process.exit(1);
-    }
-}
+  const uri = process.env.MONGODB_URI;
+
+  if (!uri) {
+    process.exit(1);
+  }
+
+  if (isConnected) return;
+
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    isConnected = true;
+    console.log(" Base de donnée MongoDB connectée");
+  } catch (err) {
+    console.error(" Erreur de connexion à MongoDB:", err.message);
+    process.exit(1);
+  }
+};

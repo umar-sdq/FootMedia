@@ -17,12 +17,14 @@ const Feed = () => {
     handleAfficher();
     handleFetchUsers();
   }, []);
+
   const handleRemove = (id) => {
     setUserPosts((prev) => prev.filter((p) => p._id !== id));
   };
+
   async function handleAfficher() {
     try {
-      const response = await fetch("http://localhost:5001/api/posts/", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +45,7 @@ const Feed = () => {
 
   async function handleFetchUsers() {
     try {
-      const response = await fetch("http://localhost:5001/api/users", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users`, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
         },
@@ -69,8 +71,9 @@ const Feed = () => {
       <div className="feed-main">
         <div className="liste-posts">
           {Array.isArray(userPosts) &&
-            userPosts.map((post) => <PostCard key={post._id} post={post} onDelete={() => handleRemove(post._id)} />
-          )}
+            userPosts.map((post) => (
+              <PostCard key={post._id} post={post} onDelete={() => handleRemove(post._id)} />
+            ))}
         </div>
       </div>
 

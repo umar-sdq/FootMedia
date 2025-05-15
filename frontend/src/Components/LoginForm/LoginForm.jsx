@@ -24,7 +24,7 @@ const LoginForm = () => {
     const fd = new FormData(event.target);
     const data = Object.fromEntries(fd.entries());
     try {
-      const response = await fetch("http://localhost:5001/api/users/login", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,6 @@ const LoginForm = () => {
         throw new Error(result.message || "Invalid login credentials");
       }
 
-      console.log("Connecté !", result);
       auth.login({
         userId: result.userId,
         username: result.username,

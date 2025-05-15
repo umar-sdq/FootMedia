@@ -29,7 +29,7 @@ const Profile = () => {
   async function handleAfficher() {
     try {
       const response = await fetch(
-        `http://localhost:5001/api/posts/user/${auth.userData.userId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/posts/user/${auth.userData.userId}`,
         {
           method: "GET",
           headers: {
@@ -48,14 +48,17 @@ const Profile = () => {
 
   const handleUpdateUserInfo = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/users/${auth.userData.userId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: updatedUsername,
-          biographie: updatedBio,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/${auth.userData.userId}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: updatedUsername,
+            biographie: updatedBio,
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Échec de la mise à jour");
 

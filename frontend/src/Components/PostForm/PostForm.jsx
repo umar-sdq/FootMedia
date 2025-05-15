@@ -59,7 +59,7 @@ const PostForm = () => {
         .from("photo-posts")
         .getPublicUrl(fileName).data.publicUrl;
 
-      const response = await fetch("http://localhost:5001/api/posts/", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,73 +86,69 @@ const PostForm = () => {
     }
   }
 
-  
-
   return (
-    <>
-      <div className="post-container">
-        <div
-          className={`post-form ${loaded ? "fade-in" : ""} ${
-            afficherInfoPost ? "form-side" : ""
-          }`}
-        >
-          {!file && (
-            <label className="upload-file">
-              {t("upload")}
-              <input type="file" accept="image/*,video/*" onChange={getFile} />
-            </label>
-          )}
+    <div className="post-container">
+      <div
+        className={`post-form ${loaded ? "fade-in" : ""} ${
+          afficherInfoPost ? "form-side" : ""
+        }`}
+      >
+        {!file && (
+          <label className="upload-file">
+            {t("upload")}
+            <input type="file" accept="image/*,video/*" onChange={getFile} />
+          </label>
+        )}
 
-          {file && (
-            <>
-              <img src={filePreview} alt="preview" className="image-prev" />
-              <div className="action-buttons">
-                {!afficherInfoPost && (
-                  <button className="btn-next" onClick={handleNext}>
-                    {t("next")}
-                  </button>
-                )}
-                <button className="btn-cancel" onClick={resetFile}>
-                  {t("cancel")}
+        {file && (
+          <>
+            <img src={filePreview} alt="preview" className="image-prev" />
+            <div className="action-buttons">
+              {!afficherInfoPost && (
+                <button className="btn-next" onClick={handleNext}>
+                  {t("next")}
                 </button>
-              </div>
-            </>
-          )}
-        </div>
-
-        {afficherInfoPost && (
-          <div className={`info-post ${loaded ? "fade-in-post" : ""}`}>
-            <p>{auth.userData.username}</p>
-            <img
-              className="logo-confirmation"
-              src={auth.userData.favoriteTeam}
-              alt="Favorite team"
-            />
-            <h2>{t("share_moments")}</h2>
-            <input type="text" id="caption" placeholder={t("caption")} />
-            <input type="text" id="location" placeholder={t("location")} />
-            <p className="slogan">Ton souvenir. Ta voix. Ta communauté.</p>
-            {isLoading && <div className="spinner"></div>}
-            <button className="btn-publier" onClick={handleCreate}>
-              {t("post_now")}
-            </button>
-
-            {userPosts.length > 0 && (
-              <div className="posts-liste">
-                <h3>{t("my_posts")} :</h3>
-                <ul>
-                  {userPosts.map((post) => (
-                    <li key={post.id}>
-                      {post.caption} - {post.location}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+              )}
+              <button className="btn-cancel" onClick={resetFile}>
+                {t("cancel")}
+              </button>
+            </div>
+          </>
         )}
       </div>
-    </>
+
+      {afficherInfoPost && (
+        <div className={`info-post ${loaded ? "fade-in-post" : ""}`}>
+          <p>{auth.userData.username}</p>
+          <img
+            className="logo-confirmation"
+            src={auth.userData.favoriteTeam}
+            alt="Favorite team"
+          />
+          <h2>{t("share_moments")}</h2>
+          <input type="text" id="caption" placeholder={t("caption")} />
+          <input type="text" id="location" placeholder={t("location")} />
+          <p className="slogan">Ton souvenir. Ta voix. Ta communauté.</p>
+          {isLoading && <div className="spinner"></div>}
+          <button className="btn-publier" onClick={handleCreate}>
+            {t("post_now")}
+          </button>
+
+          {userPosts.length > 0 && (
+            <div className="posts-liste">
+              <h3>{t("my_posts")} :</h3>
+              <ul>
+                {userPosts.map((post) => (
+                  <li key={post.id}>
+                    {post.caption} - {post.location}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 

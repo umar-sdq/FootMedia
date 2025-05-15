@@ -1,0 +1,7 @@
+{
+    "env" : {
+        "PORT": "5001",
+        "MONGODB_URI" : "mongodb+srv://umarsdq06:footmedia@cluster-footmedia.b73koxc.mongodb.net/Footmedia-db?retryWrites=true&w=majority&appName=cluster-footmedia"
+    }
+    
+}

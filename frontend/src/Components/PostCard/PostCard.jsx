@@ -9,12 +9,15 @@ function PostCard({ post, onDelete, isProfile = false }) {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/posts/${post._id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/posts/${post._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Erreur lors de la suppression du post");
@@ -37,15 +40,19 @@ function PostCard({ post, onDelete, isProfile = false }) {
           <div className="location">{post.location}</div>
         </div>
 
-        {/* ✅ Affiche les options seulement si dans le profil */}
         {isProfile && (
           <div className="post-options">
-            <button className="dots-button" onClick={() => setShowOptions(!showOptions)}>
+            <button
+              className="dots-button"
+              onClick={() => setShowOptions(!showOptions)}
+            >
               <FaEllipsisH />
             </button>
             {showOptions && (
               <div className="dropdown-options">
-                <button className="delete-btn" onClick={handleDelete}>Delete</button>
+                <button className="delete-btn" onClick={handleDelete}>
+                  Delete
+                </button>
               </div>
             )}
           </div>
