@@ -109,9 +109,37 @@ const loginUser = async (req, res, next) => {
         token: token,
     });
 };
+const updateUser = async (req, res, next) => {
+    const userId = req.params.uid;
+    const { username, biographie } = req.body;
+  
+    let user;
+    try {
+      user = await User.findById(userId);
+      if (!user) {
+        return next(new HttpError("Utilisateur non trouvé", 404));
+      }
+    } catch (err) {
+      return next(new HttpError("Erreur lors de la recherche de l'utilisateur", 500));
+    }
+  
+    if (username) user.username = username;
+    if (biographie) user.biographie = biographie;
+  
+    try {
+      await user.save();
+    } catch (err) {
+        console.error("❌ Erreur lors du save:", err); // <-- important
 
+      return next(new HttpError("Erreur lors de la mise à jour de l'utilisateur", 500));
+    }
+  
+    res.status(200).json({ user: user.toObject({ getters: true }) });
+  };
+  
 export default {
     signUp,
     loginUser,
-    getUsers
+    getUsers,
+    updateUser
 };

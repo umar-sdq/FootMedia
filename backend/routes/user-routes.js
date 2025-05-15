@@ -13,4 +13,6 @@ router.post("/signup",
 
 router.post("/login", usersController.loginUser);
 router.get("/", usersController.getUsers)
+router.patch("/:uid", usersController.updateUser);
+
 export default router; 

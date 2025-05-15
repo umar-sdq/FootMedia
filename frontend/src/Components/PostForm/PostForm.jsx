@@ -86,29 +86,7 @@ const PostForm = () => {
     }
   }
 
-  async function handleAfficher() {
-    try {
-      const response = await fetch(
-        `http://localhost:5001/api/posts/user/${auth.userData.userId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des posts");
-      }
-
-      const data = await response.json();
-      setUserPosts(data.posts);
-    } catch (err) {
-      console.error("Erreur lors de la récupération des posts:", err);
-    }
-  }
+  
 
   return (
     <>
@@ -158,7 +136,6 @@ const PostForm = () => {
             <button className="btn-publier" onClick={handleCreate}>
               {t("post_now")}
             </button>
-            <button onClick={handleAfficher}>{t("my_posts")}</button>
 
             {userPosts.length > 0 && (
               <div className="posts-liste">

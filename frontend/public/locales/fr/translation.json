@@ -42,6 +42,11 @@
     "post_placeholder": "Écris ta légende ici...",
     "post_success": "Post créé avec succès !",
     "explore_posts": "Découvrez les publications des supporters du monde entier",
-    "confirm": "Confirmer"
-  }
-  
+    "confirm": "Confirmer",
+    "followers": "Abonnées",
+    "following": "Abonnements",
+    "edit_profile": "Modifier le profil",
+    "username": "Nom d'utilisateur",
+    "save": "Sauvegarder",
+    "login_to_view_profile": "Veuillez vous connecter pour voir votre profil."
+}

@@ -42,7 +42,10 @@
     "post_placeholder": "Write your caption here...",
     "post_success": "Post created successfully!",
     "explore_posts": "Discover posts from fans around the world",
-    "confirm": "Confirm"
-
-  }
-  
+    "confirm": "Confirm",
+    "followers": "Followers",
+    "following": "Following",
+    "edit_profile": "Edit profile",
+    "save": "Save",
+    "login_to_view_profile": "Please log in to view your profile."
+}

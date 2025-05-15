@@ -3,7 +3,7 @@ const Notifications = () => {
         <>
 
         <div className="Notifications">
-        <h1>Notifications</h1>
+        <p>En developpement, revenez plus tard! </p>
         </div>
         
         </>

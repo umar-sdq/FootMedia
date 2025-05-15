@@ -1,41 +1,95 @@
 .post-profile-image {
-    width: 100%;              
-    max-width: 300px;         
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-
-  }
-  .profile-posts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 5px;
-    cursor: pointer;
-
-  }
-  .profile-header img{
-    width: 100%;
-    max-width: 120px;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-
-  }
-
-  .profile {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 20px;
-  }
-  .profile-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    justify-content: center;
-    text-align: center;
-  }
-  .boutons{
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
 }
-  
+
+.profile-posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profile-header img {
+  width: 100%;
+  max-width: 120px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.boutons {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+}
+
+.profile > * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.modal-content {
+  background: #111;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
