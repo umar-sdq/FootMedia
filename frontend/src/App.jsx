@@ -1,4 +1,3 @@
-import reactLogo from './assets/react.svg'
 import './App.css'
 import RootLayout from './Components/RootLayout/Root.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -16,16 +15,16 @@ function App() {
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      {path: "/", element: <Feed/>},
-      {path: "/add", element: <PostForm/>},
-      {path: "/edit", element: <PostForm/>},
-      {path: "/profile", element: <Profile/>},
-      {path: "/notifications", element: <Notifications/>},
-      {path: "/login", element: <LoginForm/>},
-      {path: "/signup", element: <SignUpForm/>}
+      { path: "/", element: <Feed /> },
+      { path: "/add", element: <PostForm /> },
+      { path: "/edit", element: <PostForm /> },
+      { path: "/profile", element: <Profile /> },
+      { path: "/notifications", element: <Notifications /> },
+      { path: "/login", element: <LoginForm /> },
+      { path: "/signup", element: <SignUpForm /> }
     ]
   }
-    
+
   ]);
   return (
     <AuthProvider>
@@ -35,7 +34,7 @@ function App() {
 }
 
 
-   
- 
+
+
 
 export default App
