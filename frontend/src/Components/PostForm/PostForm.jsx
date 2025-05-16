@@ -1,7 +1,7 @@
 import "../PostForm/PostForm.css";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext.jsx";
-import supabase from "../../../util/supabase.js";
+import supabase from "../../../../backend/util/supabase.js";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
